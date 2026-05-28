@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "24226567-56ae-4107-b18d-099c26d47bac",
+		"name": "SecureFlight API",
+		"description": "A collection for testing the SecureFlight API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7641865"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"jwt_token\", jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authentication/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authentication",
+								"login"
+							]
+						},
+						"description": "Authenticates a user and retrieves a JWT. The token is automatically saved as a collection variable `jwt_token`."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flights",
+			"item": [
+				{
+					"name": "Get Flight with all Passengers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/flights/1/passengers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"flights",
+								"1",
+								"passengers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Passenger to Flight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"passengerId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/flights/1/add/passengers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"flights",
+								"1",
+								"add",
+								"passengers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Passenger from Flight",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"passengerId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/flights/1/remove/passengers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"flights",
+								"1",
+								"remove",
+								"passengers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Flights (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/flights",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"flights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Flights (No Pagination)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/flights/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"flights",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Flight By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/flights/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"flights",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Flight",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"AVRT\",\n    \"origin\": \"origin\",\n    \"destination\": \"destination\",\n    \"status\": \"confirmed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/flights/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"flights",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Passengers",
+			"item": [
+				{
+					"name": "Get All Passengers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/passengers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"passengers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8082",
+			"type": "string"
+		},
+		{
+			"key": "jwt_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

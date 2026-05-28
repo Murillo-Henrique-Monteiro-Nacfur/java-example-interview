@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  secure-flight-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: SecureFlight
+    networks:
+      - secury-flight-network
+    ports:
+      - "8082:8080"
+#
+#volumes:
+#  postgres-data:
+#
+networks:
+  secury-flight-network:
+    driver: bridge
