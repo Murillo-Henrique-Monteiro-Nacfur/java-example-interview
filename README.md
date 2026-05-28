@@ -1,8 +1,5 @@
 # Java Spring Boot Coding Exercise
 
-## Important Information
-You will receive the coding exercise via email 20 minutes before the interview. Please ensure you download this repository and create a new one for your modifications, which will be committed during the interview.
-
 ## Running the Application
 To run the Spring Boot application and access the H2 console, follow these steps:
 
